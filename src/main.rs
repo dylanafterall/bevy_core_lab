@@ -8,7 +8,9 @@ mod ui;
 
 use config::config_manager;
 use game::game_manager;
+use graphics::graphics_manager;
 use states::state_manager;
+use ui::ui_manager;
 
 use bevy::{log::LogPlugin, prelude::*, window::WindowMode};
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
@@ -27,7 +29,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     primary_window: Some(Window {
                         mode: WindowMode::Windowed,
                         position: WindowPosition::Centered(MonitorSelection::Primary),
-                        //visible: false,
+                        visible: false,
                         ..default()
                     }),
                     ..default()
@@ -35,7 +37,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 .set(ImagePlugin::default_nearest())
                 .set(LogPlugin {
                     #[cfg(debug_assertions)]
-                    level: bevy::log::Level::INFO,
+                    level: bevy::log::Level::DEBUG,
                     #[cfg(not(debug_assertions))]
                     level: bevy::log::Level::INFO,
                     ..default()
@@ -51,10 +53,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         .add_plugins((
             config_manager::ConfigManagerPlugin,
             game_manager::GameManagerPlugin,
-            //graphics_manager::GraphicsManagerPlugin,
-            //player_manager::PlayerManagerPlugin,
+            graphics_manager::GraphicsManagerPlugin,
             state_manager::StateManagerPlugin,
-            //ui_manager::UiManagerPlugin,
+            ui_manager::UiManagerPlugin,
         ))
         .run();
 

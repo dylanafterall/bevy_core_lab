@@ -1,4 +1,7 @@
-use crate::states::app_state::AppState;
+use crate::{
+    states::app_state::AppState,
+    style::{style_splash::SPLASH_CLEAR_COLOR, style_ui::NORMAL_CLEAR_COLOR},
+};
 
 use bevy::{
     core::FrameCount,
@@ -14,7 +17,7 @@ pub struct WindowsPlugin;
 impl Plugin for WindowsPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(FramepacePlugin)
-            .insert_resource(ClearColor(Color::rgb(0.2, 0.2, 0.2)))
+            .insert_resource(ClearColor(SPLASH_CLEAR_COLOR))
             .insert_resource(Msaa::Off)
             .init_resource::<ResolutionSettings>()
             .init_resource::<FramerateSettings>()
@@ -137,7 +140,7 @@ pub fn setup_window(
     // TODO: replace hard coded default values with saved options in external file
     let mut window = windows.single_mut();
 
-    window.title = "Make Like".into();
+    window.title = "Bevy Core Lab".into();
     window.present_mode = PresentMode::AutoVsync;
     window.resizable = false;
 
@@ -151,7 +154,7 @@ pub fn setup_window(
 }
 
 pub fn set_normal_clear_color(mut clear_color: ResMut<ClearColor>) {
-    clear_color.0 = Color::PURPLE;
+    clear_color.0 = NORMAL_CLEAR_COLOR;
 }
 
 pub fn make_visible(mut windows: Query<&mut Window>, frames: Res<FrameCount>) {

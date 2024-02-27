@@ -45,7 +45,7 @@ enum ActiveInput {
 pub enum InputAction {
     Move,
     Look,
-    Shoot,
+    Select,
 }
 
 impl InputAction {
@@ -55,12 +55,12 @@ impl InputAction {
         // default gamepad input bindings
         input_map.insert(Self::Move, DualAxis::left_stick());
         input_map.insert(Self::Look, DualAxis::right_stick());
-        input_map.insert(Self::Shoot, GamepadButtonType::RightTrigger);
+        input_map.insert(Self::Select, GamepadButtonType::RightTrigger);
 
         // default kbm input bindings
         input_map.insert(Self::Move, VirtualDPad::wasd());
         input_map.insert(Self::Look, VirtualDPad::arrow_keys());
-        input_map.insert(Self::Shoot, MouseButton::Left);
+        input_map.insert(Self::Select, KeyCode::Space);
 
         input_map
     }
